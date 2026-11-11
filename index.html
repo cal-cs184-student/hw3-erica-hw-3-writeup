@@ -1,106 +1,420 @@
+
+<!DOCTYPE html>
 <html>
-	<head>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-		<style>
-			h1 {
-				text-align: center;
-			}
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-			.container {
-				margin: 0 auto;
-				padding: 60px 20%;
-			}
+    <style>
+        h1 {
+            text-align: center;
+        }
 
-			figure {
-				text-align: center;
-			}
+        .container {
+            margin: 0 auto;
+            padding: 60px 10%;
+        }
 
-			img {
-				display: inline-block;
-			}
+        figure {
+            text-align: center;
+            margin: 15px 5px;
+        }
 
-			body {
-				font-family: 'Inter', sans-serif;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-		<h1>CS184/284A Fall 2026 Homework 3 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+        img {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
+        }
 
-		<br>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/fa26">cs184.eecs.berkeley.edu/fa26</a>
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/fa26">cs184.eecs.berkeley.edu/fa26</a>
-		
-		<figure>
-			<img src="assets/cornell.png" alt="Cornell Boxes with Bunnies" style="width:70%"/>
-			<figcaption>You can add images with captions!</figcaption>
-		</figure>
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            align-items: start;
+            margin: 20px 0;
+        }
 
-		<!--
-		We've already added one heading per part, to make your write-up as navigable when grading. Please fit your write-up within these sections!
-		-->
+        .image-grid.three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
 
-		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+        .image-grid.four {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
 
-		<h2>Part 1: Ray Generation and Scene Intersection</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .image-grid.six {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
 
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
-		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="assets/cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="assets/cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="assets/cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="assets/cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			</table>
-		</div>
-		
-		<h2>Part 2: Bounding Volume Hierarchy</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .image-grid.seven {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
 
-		<h2>Part 3: Direct Illumination</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .image-grid figure {
+            margin: 0;
+        }
 
-		<h2>Part 4: Global Illumination</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .image-grid img {
+            width: 100%;
+            height: auto;
+        }
 
-		<h2>Part 5: Adaptive Sampling</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        figcaption {
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
 
-		<h2>(Optional) Part 6: Extra Credit Opportunities</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
-		</div>
-	</body>
+        .section-caption {
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 30px 5%;
+            }
+
+            .image-grid,
+            .image-grid.three,
+            .image-grid.four,
+            .image-grid.six,
+            .image-grid.seven {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>CS184/284A Fall 2026 Homework 3 Write-Up</h1>
+    <div style="text-align: center;">Names: Erica Liu</div>
+
+    <br>
+
+    Link to webpage:
+    <a href="https://cs184.eecs.berkeley.edu/fa26">cs184.eecs.berkeley.edu/fa26</a>
+    <br>
+    Link to GitHub repository:
+    <a href="https://github.com/cal-cs184-student/hw3-erica-hw3-writeup">GitHub repository</a>
+
+    <h2>Overview</h2>
+
+    In this homework, I implemented a path tracer that simulates how light interacts with objects in a 3D scene to produce realistic images. I learned a lot about light rays, ray-scene interaction, accelerating rendering using bounding-volume hierarchy, different types of illumination, and adaptive sampling.
+
+    <h2>Part 1: Ray Generation and Scene Intersection</h2>
+
+    <p>
+        Ray generation: Points are sampled within each pixel and a ray is generated from the camera’s position. Then, the ray is transformed from camera space into world space and its direction normalized.
+    </p>
+
+    <p>
+        Once the ray is generated, I check if it intersects any objects in the scene using the ray-triangle intersection test. If there are multiple intersections, the closest one is kept by updating max_t to the nearest intersection.
+    </p>
+
+    <p>
+        Triangle intersection algorithm: I first calculate the triangle’s normal and then calculate where the ray intersects the plane, solving for parameter t. If the ray intersects the plane within the valid range, I move to determining if the intersection point is within the triangle using barycentric coordinates. If any weight is negatives, we know the point lies outside the triangle, so the intersection is not valid.
+    </p>
+
+    <div class="image-grid three">
+        <figure>
+            <img src="assets/CBspheres.png" alt="Normal shading of spheres">
+            <figcaption>normal shading of spheres</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/simple1.png" alt="Normal shading of cube">
+            <figcaption>normal shading of cube</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/simple_bench.png" alt="Normal shading of bench">
+            <figcaption>normal shading of bench</figcaption>
+        </figure>
+    </div>
+
+    <h2>Part 2: Bounding Volume Hierarchy</h2>
+
+    <p>
+        BVH algorithm: To construct the BVH, at every step, I calculated the bounding box that contained all the primitives in the current set. If the number of primitives was small enough, they would go into a leaf node. Otherwise, the primitives were split into two groups and a BVH was recursively constructed for each group.
+    </p>
+
+    <p>
+        The splitting heuristic was at the median of the longest axis. I calculated the bounding box’s extent along the 3 axes and chose the one with the largest extent. Once the axis was chosen, the midpoint index of the range was calculated, placing about half of the primitives on each side.
+    </p>
+
+    <div class="image-grid three">
+        <figure>
+            <img src="assets/q2/cblucy.png" alt="CBLucy">
+        </figure>
+        <figure>
+            <img src="assets/q2/cow.png" alt="Cow">
+        </figure>
+        <figure>
+            <img src="assets/q2/maxplanck.png" alt="Max Planck">
+        </figure>
+    </div>
+    <p class="section-caption">
+        Renders of large .dae files with many triangles that are rapidly accelerated using BVH acceleration.
+    </p>
+
+    <p>
+        I compared rendering times before and after implementing BVH acceleration. For the cow, rendering time decreased from 21.1679 seconds to 0.0581 seconds. For Max Planck, it decreased from 289.2308 seconds to 0.0721 seconds, and for CBLucy, it decreased from 755.0940 seconds to 0.0593 seconds. These results demonstrate a significant improvement in rendering performance, especially for scenes with many triangles. By organizing primitives into a hierarchy of bounding boxes, the BVH allows the renderer to skip large portions of the scene during intersection tests instead of checking every primitive individually.
+    </p>
+
+    <h2>Part 3: Direct Illumination</h2>
+
+    <p>
+        In both sampling approaches, Monte Carlo integration is used to approximate the rendering equation. In uniform hemisphere sampling, a fixed number of random directions are generated, uniformly distributed across the hemisphere. Then, I check if each ray hits an object; if so, the amount of reflected light contribution is calculated and included in the final estimate. In importance sampling, I iterate over the scene’s actual light sources and sample directions directly from each source. If the light is not blocked from the target by another object, its reflected contribution is added to our estimate.
+    </p>
+
+    <div class="image-grid">
+        <figure>
+            <img src="assets/q3/q3_spheres_uniform.png" alt="Spheres using uniform lighting sampling">
+            <figcaption>spheres rendered using uniform lighting sampling</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q3/q3_spheres_importance.png" alt="Spheres using importance lighting sampling">
+            <figcaption>spheres rendered using importance lighting sampling</figcaption>
+        </figure>
+    </div>
+
+    <div class="image-grid">
+        <figure>
+            <img src="assets/q3/q3_uniform_bunny.png" alt="Bunny using uniform lighting sampling">
+            <figcaption>bunny rendered using uniform lighting sampling</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q3/q3_importance_bunny.png" alt="Bunny using importance lighting sampling">
+            <figcaption>bunny rendered using importance lighting sampling</figcaption>
+        </figure>
+    </div>
+
+    <div class="image-grid four">
+        <figure>
+            <img src="assets/q3/q3_l1_bunny.png" alt="One light ray">
+            <figcaption>rendering with 1 light ray using light sampling</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q3/q3_l4_bunny.png" alt="Four light rays">
+            <figcaption>rendering with 4 light rays using light sampling</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q3/q3_l16_bunny.png" alt="Sixteen light rays">
+            <figcaption>rendering with 16 light rays using light sampling</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q3/q3_l64_bunny.png" alt="Sixty-four light rays">
+            <figcaption>rendering with 64 light rays using light sampling</figcaption>
+        </figure>
+    </div>
+
+    <p>
+        Uniform sampling results in noisier images because directions are randomly selected across the hemisphere. We can see that all of the objects look less smooth/more grainy. On the contrary, lighting/importance sampling directly samples points on light sources, so less noisy/smoother images are produced.
+    </p>
+
+    <h2>Part 4: Global Illumination</h2>
+
+    <p>
+        My implementation of indirect lighting uses recursive ray tracing to estimate multi-bounce light results. At each intersection, I sample a new direction using the surface’s BSDF and then determine the incoming radiance. I then add up the contributions of the bounces until the maximum ray depth is reached.
+    </p>
+
+    <div class="image-grid three">
+        <figure>
+            <img src="assets/q4/global/q4_bunny_1024.png" alt="Bunny with global lighting">
+            <figcaption>rendered bunny with global lighting</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/global/q4_walle.png" alt="Wall-E with global lighting">
+            <figcaption>rendered wall-e with global lighting</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/global/spheres.png" alt="Spheres with global lighting">
+            <figcaption>rendered spheres with global lighting</figcaption>
+        </figure>
+    </div>
+
+    <div class="image-grid">
+        <figure>
+            <img src="assets/q4/q4_bunny_direct.png" alt="Bunny with direct illumination">
+            <figcaption>rendered bunny with only direct illumination and 1024 samples/pixel</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/q4_bunny_indirect.png" alt="Bunny with indirect illumination">
+            <figcaption>rendered bunny with only indirect illumination and 1024 samples/pixel</figcaption>
+        </figure>
+    </div>
+
+    <h3>Unaccumulated Bounces</h3>
+
+    <div class="image-grid six">
+        <figure>
+            <img src="assets/q4/unacc/q4_unacc_raydepth_0.png" alt="Unaccumulated depth 0">
+            <figcaption>unaccumulated bounces, max_ray_depth = 0</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/unacc/q4_unacc_raydepth_1.png" alt="Unaccumulated depth 1">
+            <figcaption>unaccumulated bounces, max_ray_depth = 1</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/unacc/q4_unacc_raydepth_2.png" alt="Unaccumulated depth 2">
+            <figcaption>unaccumulated bounces, max_ray_depth = 2</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/unacc/q4_unacc_raydepth_3.png" alt="Unaccumulated depth 3">
+            <figcaption>unaccumulated bounces, max_ray_depth = 3</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/unacc/q4_unacc_raydepth_4.png" alt="Unaccumulated depth 4">
+            <figcaption>unaccumulated bounces, max_ray_depth = 4</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/unacc/q4_unacc_raydepth_5.png" alt="Unaccumulated depth 5">
+            <figcaption>unaccumulated bounces, max_ray_depth = 5</figcaption>
+        </figure>
+    </div>
+
+    <h3>Accumulated Bounces</h3>
+
+    <div class="image-grid six">
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth0.png" alt="Accumulated depth 0">
+            <figcaption>accumulated bounces, max_ray_depth = 0</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth1.png" alt="Accumulated depth 1">
+            <figcaption>accumulated bounces, max_ray_depth = 1</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth2.png" alt="Accumulated depth 2">
+            <figcaption>accumulated bounces, max_ray_depth = 2</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth3.png" alt="Accumulated depth 3">
+            <figcaption>accumulated bounces, max_ray_depth = 3</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth4.png" alt="Accumulated depth 4">
+            <figcaption>accumulated bounces, max_ray_depth = 4</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth5.png" alt="Accumulated depth 5">
+            <figcaption>accumulated bounces, max_ray_depth = 5</figcaption>
+        </figure>
+    </div>
+
+    <p>
+        At depth 2, we see the results of the second bounce of light, where light bounces one more time than direct lighting. At depth 3, we are looking at light that has already bounced off two surfaces before reaching the camera, adding more indirect lighting. These extra bounces add realism to the images by introducing lighting past just the naive direct lighting that exists in our real life.
+        Between accumulated and unaccumulated bounces, we can see that the unaccumulated bounces only consider the results of the deepest bounce, while the accumulated bounces add up the results of the bounces and consider previous bounces. As a result, the unaccumulated bounces get darker as the number of increases, while the accumulated bounces get brighter.
+    </p>
+
+    <h3>Russian Roulette</h3>
+
+    <div class="image-grid six">
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth0.png" alt="Russian Roulette depth 0">
+            <figcaption>max_ray_depth = 0</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth1.png" alt="Russian Roulette depth 1">
+            <figcaption>max_ray_depth = 1</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth2.png" alt="Russian Roulette depth 2">
+            <figcaption>max_ray_depth = 2</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth3.png" alt="Russian Roulette depth 3">
+            <figcaption>max_ray_depth = 3</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/acc_depth/q4_raydepth4.png" alt="Russian Roulette depth 4">
+            <figcaption>max_ray_depth = 4</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/bunny_russian_roulette_100.png" alt="Russian Roulette depth 100">
+            <figcaption>max_ray_depth = 100</figcaption>
+        </figure>
+    </div>
+
+    <p class="section-caption">
+        Russian Roulette rendering with max_ray_depth set to 0, 1, 2, 3, 4, and 100.
+    </p>
+
+    <h3>Sample Rate Comparison</h3>
+
+    <div class="image-grid seven">
+        <figure>
+            <img src="assets/q4/rates/q4_rate1.png" alt="Rate 1">
+            <figcaption>rate = 1</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/rates/q4_rate2.png" alt="Rate 2">
+            <figcaption>rate = 2</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/rates/q4_rate4.png" alt="Rate 4">
+            <figcaption>rate = 4</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/rates/q4_rate8.png" alt="Rate 8">
+            <figcaption>rate = 8</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/rates/q4_rate16.png" alt="Rate 16">
+            <figcaption>rate = 16</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/rates/q4_rate64.png" alt="Rate 64">
+            <figcaption>rate = 64</figcaption>
+        </figure>
+        <figure>
+            <img src="assets/q4/rates/q4_rate1024.png" alt="Rate 1024">
+            <figcaption>rate = 1024</figcaption>
+        </figure>
+    </div>
+
+    <p class="section-caption">
+        Rendered bunny with sample-per-pixel rates set to various values and 4 light rays.
+    </p>
+
+    <h2>Part 5: Adaptive Sampling</h2>
+
+    <p>
+        Adaptive sampling allows us to increase the number of samples per pixel without doing so uniformly, since some pixels converge faster with low sampling rates. In other words, the samples are concentrated in more difficult parts of the image. I implemented this generates samples in batches and tracks the sum and squared sum of illuminance values. After each batch, a 95% confidence interval is calculated for the pixel’s colors. If the interval is smaller than a specified tolerance, the pixel is converged and the sampling terminates early.
+    </p>
+
+    <div class="image-grid">
+        <figure>
+            <img src="assets/q5/q5_blob.png" alt="Blob rendered with adaptive sampling">
+        </figure>
+        <figure>
+            <img src="assets/q5/q5_blob_rate.png" alt="Blob adaptive sampling rate">
+        </figure>
+    </div>
+
+    <div class="image-grid">
+        <figure>
+            <img src="assets/q5/q5_bunny.png" alt="Bunny rendered with adaptive sampling">
+        </figure>
+        <figure>
+            <img src="assets/q5/q5_bunny_rate.png" alt="Bunny adaptive sampling rate">
+        </figure>
+    </div>
+
+    <p class="section-caption">
+        Noise-free rendered results and corresponding adaptive sampling rates.
+    </p>
+
+	<p>
+		AI use note: I used LLM's to coach me as I completed the code.
+	</p>
+
+</div>
+</body>
 </html>
